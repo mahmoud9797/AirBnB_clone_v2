@@ -1,9 +1,10 @@
 #!/usr/bin/python3
-""" City Module for HBNB project """
+""" module for the city """
 from models.base_model import BaseModel
 
 
 class City(BaseModel):
-    """ The city class, contains state ID and name """
+    """ represnt tha name of the city and state id """
+
     state_id = ""
     name = ""
