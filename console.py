@@ -2,6 +2,7 @@
 """ module for console """
 import cmd
 import json
+import models
 from models import storage
 from models.place import Place
 from models.base_model import BaseModel
@@ -177,7 +178,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         class_name = args[0]
-        if class_name not in self.collection_keys:
+        if class_name not in self.__classes_dict:
             print("** class doesn't exist **")
             return
         if len(args) == 1:
@@ -186,7 +187,7 @@ class HBNBCommand(cmd.Cmd):
 
         instance_id = args[1]
         query_key = f"{class_name}.{instance_id}"
-        obj_dict = models.storage.all()
+        obj_dict = storage.all()
         if query_key not in obj_dict.keys():
             print("** no instance found **")
             return
