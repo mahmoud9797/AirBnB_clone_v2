@@ -49,4 +49,6 @@ class BaseModel:
         dic_t["__class__"] = self.__class__.__name__
         dic_t["created_at"] = self.created_at.isoformat()
         dic_t["updated_at"] = self.updated_at.isoformat()
+        if "_sa_instance_state" in dic_t.keys:
+            del dic_t["_sa_instance_state"]
         return dic_t
