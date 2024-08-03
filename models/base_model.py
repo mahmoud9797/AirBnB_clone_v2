@@ -8,8 +8,6 @@ from sqlalchemy import DateTime
 from sqlalchemy import Integer, Column, String
 
 
-
-
 class BaseModel:
     """ Base model class represents the parent class of the HBNB project """
 
@@ -30,11 +28,13 @@ class BaseModel:
                         v = datetime.strptime(v, time_f)
                     else:
                         setattr(self, k, v)
+        else:
+            models.storage.new(self)
+
 
     def save(self):
         """ method used to update the updated date of the object """
         self.updated_at = datetime.today()
-        models.storage.new(self)
         models.storage.save()
 
     def __str__(self):
