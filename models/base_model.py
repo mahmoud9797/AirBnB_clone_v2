@@ -3,10 +3,17 @@
 from datetime import datetime
 from uuid import uuid4
 import models
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import DateTime
+from sqlalchemy import Integer, Column, String
 
-
+Base = declarative_base()
 class BaseModel:
     """ Base model class represents the parent class of the HBNB project """
+    id = Column(String(60), primary_key=True, nullable=False)
+    created_at = Column(datetime, nullable=False, default=datetime.utcnow())
+    updated_at = Column(datetime, nullable=False, default=datetime.utcnow())
+
 
     def __init__(self, *args, **kwargs):
         """
@@ -25,12 +32,12 @@ class BaseModel:
                         v = datetime.strptime(v, time_f)
                     else:
                         setattr(self, k, v)
-        else:
-            models.storage.new(self)
+            
 
     def save(self):
         """ method used to update the updated date of the object """
         self.updated_at = datetime.today()
+        models.storage.new(self)
         models.storage.save()
 
     def __str__(self):
@@ -52,3 +59,7 @@ class BaseModel:
         if "_sa_instance_state" in dic_t.keys:
             del dic_t["_sa_instance_state"]
         return dic_t
+    
+    def delete(self):
+        """use to delete the current instance from the storage"""
+        models.storage.delete()
