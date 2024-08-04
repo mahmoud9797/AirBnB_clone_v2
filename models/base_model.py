@@ -8,6 +8,9 @@ from sqlalchemy import DateTime
 from sqlalchemy import Column, String, Integer
 
 
+Base = declarative_base()
+
+
 class BaseModel:
     """ Base model class represents the parent class of the HBNB project """
 
