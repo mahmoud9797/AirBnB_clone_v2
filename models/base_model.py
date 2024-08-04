@@ -3,6 +3,9 @@
 from datetime import datetime
 from uuid import uuid4
 import models
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import DateTime
+from sqlalchemy import Column, String, Integer
 
 
 class BaseModel:
