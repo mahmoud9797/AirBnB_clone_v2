@@ -14,6 +14,7 @@ Base = declarative_base()
 class BaseModel:
     """ Base model class represents the parent class of the HBNB project """
     id = Column(String(60), primary_key=True, nullable=False)
+    created_at = Column(DateTime, nullable=False, default=datetime.utcnow())
 
     def __init__(self, *args, **kwargs):
         """
