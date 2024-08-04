@@ -61,7 +61,6 @@ class HBNBCommand(cmd.Cmd):
             "Amenity"
             }
 
-    
     def do_create(self, arg):
         """Usage: create <class> <key 1>=<value 2> <key 2>=<value 2> ...
         Create a new class instance with given keys/values and print its id.
@@ -95,7 +94,6 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         except NameError:
             print("** class doesn't exist **")
-
 
     def do_show(self, arg):
         """ show info about an object based on class name & id"""
@@ -186,7 +184,7 @@ class HBNBCommand(cmd.Cmd):
 
         instance_id = args[1]
         query_key = f"{class_name}.{instance_id}"
-        obj_dict = models.storage.all()
+        obj_dict = storage.all()
         if query_key not in obj_dict.keys():
             print("** no instance found **")
             return
