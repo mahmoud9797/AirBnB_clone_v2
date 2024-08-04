@@ -35,8 +35,9 @@ class BaseModel:
     def save(self):
         """ method used to update the updated date of the object """
         self.updated_at = datetime.today()
-        models.storage.save()
         models.storage.new(self)
+        models.storage.save()
+        
 
     def __str__(self):
         """
