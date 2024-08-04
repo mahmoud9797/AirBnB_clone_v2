@@ -54,6 +54,7 @@ class DBStorage:
                     k = "{}.{}".format(obj.__class__.__name__, obj.id)
                     objs_dict[k] = obj
             return objs_dict
+
     def new(self, obj):
         """ to add new object to the current db"""
         self.__session.add(obj)
@@ -61,6 +62,7 @@ class DBStorage:
     def save(self):
         """commit all changes which occured durring session"""
         self.__session.commit()
+
     def delete(self, obj=None):
         """ to delet object from db"""
         if obj:
@@ -69,7 +71,10 @@ class DBStorage:
     def reload(self):
         """create all tables in databas"""
         Base.metadata.create_all(self.__engine)
-        self.__session = scoped_session(sessionmaker(bind=self.__engine, expire_on_commit=False))
+        self.__session = scoped_session(
+            sessionmaker(
+                bind=self.__engine,
+                expire_on_commit=False))
 
     def close(self):
         """to close the current session"""
