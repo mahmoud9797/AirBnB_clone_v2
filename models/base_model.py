@@ -2,20 +2,11 @@
 """ Basmodel module for whole the program """
 from datetime import datetime
 from uuid import uuid4
-import pytz
 import models
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, DateTime
-
-
-Base = declarative_base() 
 
 
 class BaseModel:
     """ Base model class represents the parent class of the HBNB project """
-    id = Column(String(60), primary_key=True, nullable=False)
-    created_at = Column(DateTime, nullable=False, default=datetime.utcnow())
-    updated_at = Column(DateTime, nullable=False, default=datetime.utcnow())
 
     def __init__(self, *args, **kwargs):
         """
@@ -34,14 +25,13 @@ class BaseModel:
                         v = datetime.strptime(v, time_f)
                     else:
                         setattr(self, k, v)
-           
+        else:
+            models.storage.new(self)
 
     def save(self):
         """ method used to update the updated date of the object """
         self.updated_at = datetime.today()
-        models.storage.new(self)
         models.storage.save()
-        
 
     def __str__(self):
         """
@@ -60,7 +50,3 @@ class BaseModel:
         dic_t["created_at"] = self.created_at.isoformat()
         dic_t["updated_at"] = self.updated_at.isoformat()
         return dic_t
-    
-    def delete(self):
-        '''delete the current instance from the storage'''
-        models.storage.delete()
