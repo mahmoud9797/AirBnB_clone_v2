@@ -7,6 +7,10 @@ import models
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, DateTime
 
+
+Base = declarative_base() 
+
+
 class BaseModel:
     """ Base model class represents the parent class of the HBNB project """
     id = Column(String(60), primary_key=True, nullable=False)
