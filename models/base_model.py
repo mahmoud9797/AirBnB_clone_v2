@@ -13,6 +13,7 @@ Base = declarative_base()
 
 class BaseModel:
     """ Base model class represents the parent class of the HBNB project """
+    id = Column(String(60), primary_key=True, nullable=False)
 
     def __init__(self, *args, **kwargs):
         """
